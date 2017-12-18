@@ -23,12 +23,17 @@ libutils.a: $(LIBDIR)/utils.o
 	$(AR) rcs $(LIBDIR)/$@ $<
 
 #FIXME
-e-4-1.out: libutils.a
+#*: libutils.a
 
 e-4-1.out: e-4-1.o
 	#FIXME: the order of $<
 	$(CC) $(MYCFLAGS) $(LDFLAGS) $< $(LIBS) -o $@
 
+s-4-2.out: s-4-2.o
+	$(CC) $(MYCFLAGS) $(LDFLAGS) $< $(LIBS) -o $@
+
 
 clean:
 	rm -rf *.o *.out lib/*.o lib/*.a
+
+.PHONY: clean

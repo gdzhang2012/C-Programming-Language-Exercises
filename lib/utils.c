@@ -1,12 +1,13 @@
 #include "utils.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
 
 int Input_bufp = 0;
 char Input_buf[BUFSIZE];
 
 /*get_line: get line into s, return length*/
-int get_line(char s[], int lim)
+int Getline(char s[], int lim)
 {
   int c, i;
 
@@ -25,11 +26,13 @@ int get_line(char s[], int lim)
   return i;
 }
 
+/* get next character */
 int getch(void)
 {
   return (Input_bufp > 0) ? Input_buf[--Input_bufp] : getchar();
 }
 
+/* push character back */
 void ungetch(int c)
 {
   if(Input_bufp >= BUFSIZE)
@@ -40,4 +43,47 @@ void ungetch(int c)
   {
     Input_buf[Input_bufp++] = c;
   }
+}
+
+/* Atof: convert strings to double */
+double Atof(char s[])
+{
+  double val, power;
+  int i, sign;
+
+  /* skip white space */
+  for (i = 0; isspace(s[i]); i++)
+  {
+    //do nothing
+  }
+
+  sign = (s[i] == '-') ? -1 : 1;
+  if (s[i] == '-' || s[i] == '+')
+  {
+    i++;
+  }
+
+  for (val = 0.0; isdigit(s[i]); i++)
+  {
+    val = 10.0 * val + (s[i] - '0');
+  }
+
+  if (s[i] == '.')
+  {
+    i++;
+  }
+
+  for (power = 1.0; isdigit(s[i]); i++)
+  {
+     val = 10.0 * val + (s[i] - '0');
+     power = 10.0 * power;
+  }
+
+  return sign * val / power;
+}
+
+/* Atoi: convert string s to int */
+int Aoti(char s[])
+{
+  return (int)Atof(s);
 }

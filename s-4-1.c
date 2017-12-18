@@ -1,1 +1,0 @@
-ch4/samples/search_pattern.c
