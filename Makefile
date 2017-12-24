@@ -25,13 +25,15 @@ libutils.a: $(LIBDIR)/utils.o
 #FIXME
 #*: libutils.a
 
+# need an auto mode
 e-4-1.out: e-4-1.o
-	#FIXME: the order of $<
 	$(CC) $(MYCFLAGS) $(LDFLAGS) $< $(LIBS) -o $@
 
 s-4-2.out: s-4-2.o
 	$(CC) $(MYCFLAGS) $(LDFLAGS) $< $(LIBS) -o $@
 
+e-4-2.out: e-4-2.o
+	$(CC) $(MYCFLAGS) $(LDFLAGS) $< $(LIBS) -o $@
 
 clean:
 	rm -rf *.o *.out lib/*.o lib/*.a

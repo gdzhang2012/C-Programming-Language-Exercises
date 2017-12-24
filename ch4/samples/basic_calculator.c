@@ -5,7 +5,7 @@
 int main()
 {
   double sum;
-  char line[MAXLINE];
+  char line[MAXLINE] = "";
 
   sum = 0;
   

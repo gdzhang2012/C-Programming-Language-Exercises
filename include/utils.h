@@ -14,4 +14,8 @@ void ungetch(int c);
 double Atof(char s[]);
 
 /* Atoi: convert string s to int */
-int Aoti(char s[]);
+int Atoi(char s[]);
+
+/* Debug output
+Printf(char s[]);
+*/

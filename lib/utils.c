@@ -83,7 +83,14 @@ double Atof(char s[])
 }
 
 /* Atoi: convert string s to int */
-int Aoti(char s[])
+int Atoi(char s[])
 {
   return (int)Atof(s);
 }
+
+/* Debug output
+Printf(char s[])
+{
+  printf("[%s] [%d] %s");
+}
+*/
