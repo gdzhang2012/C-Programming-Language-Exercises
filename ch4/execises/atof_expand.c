@@ -1,5 +1,6 @@
 #include "utils.h"
 #include <stdio.h>
+#include <ctype.h>
 
 static double _Atof(char s[]);
 

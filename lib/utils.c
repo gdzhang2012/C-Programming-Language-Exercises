@@ -11,6 +11,7 @@ int Getline(char s[], int lim)
 {
   int c, i;
 
+  c = 0;
   i = 0;
 
   while(--lim > 0 && (c = getchar()) != EOF && c != '\n')
