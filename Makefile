@@ -1,9 +1,9 @@
-$(warning test1)
+#$(warning test1)
 
 #头文件及库路径
 CFLAGS=-I./include/ -L./lib
 #优化
-OFLAGS=-O
+OFLAGS=-O0
 #调试
 DGFLAGS=-g
 #警告
@@ -19,15 +19,14 @@ MYCFLAGS=$(CFLAGS) $(WARNFLGS) $(DGFLAGS) $(OFLAGS)
 
 #模式规则
 %.o : %.c
-	$(warning $<)
 	$(CC) -c $(MYCFLAGS) $< -o $@
 
 all:
-	#TODO
 
 libutils.a: $(LIBDIR)/utils.o
 	$(AR) rcs $(LIBDIR)/$@ $<
 
+# TODO
 # need an auto mode
 e-4-1.out: e-4-1.o
 	$(CC) $(MYCFLAGS) $< $(LIBS) -o $@
@@ -36,7 +35,9 @@ s-4-2.out: s-4-2.o
 	$(CC) $(MYCFLAGS) $< $(LIBS) -o $@
 
 e-4-2.out: e-4-2.o
-	$(warning $@)
+	$(CC) $(MYCFLAGS) $< $(LIBS) -o $@
+
+s-6-5.out: s-6-5.o
 	$(CC) $(MYCFLAGS) $< $(LIBS) -o $@
 
 clean:

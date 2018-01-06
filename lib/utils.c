@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <ctype.h>
 
-int Input_bufp = 0;
-char Input_buf[BUFSIZE];
+static int Input_bufp = 0;
+static char Input_buf[BUFSIZE];
 
 /*get_line: get line into s, return length*/
 int Getline(char s[], int lim)
@@ -44,6 +44,42 @@ void ungetch(int c)
   {
     Input_buf[Input_bufp++] = c;
   }
+}
+
+/* getword: get next word or character from input */
+int getword(char *word, int lim)
+{
+  int c, getch(void);
+  void ungetch(int);
+  char *w = word;
+
+  while (isspace(c = getch()))
+  {
+    //do nothing
+  }
+
+  if (c != EOF)
+  {
+     *w++ = c;
+  }
+
+  if (!isalpha(c))
+  {
+    *w = '\0';
+    return c;
+  }
+  for (; --lim > 0; w++)
+  {
+    if (!isalnum(*w = getch()))
+    {
+      ungetch(*w);
+      break;
+    }
+  }
+
+  *w = '\0';
+
+  return word[0];
 }
 
 /* Atof: convert strings to double */

@@ -10,8 +10,11 @@ int getch(void);
 /* push character back */
 void ungetch(int c);
 
-/* Atof: convert string s to double */
+/* convert string s to double */
 double Atof(char s[]);
+
+/* get next word or character from input */
+int getword(char *word, int lim);
 
 /* Atoi: convert string s to int */
 int Atoi(char s[]);
