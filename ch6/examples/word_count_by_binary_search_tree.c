@@ -11,6 +11,7 @@ struct tnode *talloc(void);
 struct tnode *addtree(struct tnode *, char *);
 void treeprint(struct tnode *);
 void treedestroy(struct tnode *);
+struct tnode *treefind(struct tnode *p, char *word);
 
 struct tnode /*the tree node*/
 {
@@ -21,21 +22,40 @@ struct tnode /*the tree node*/
 };
 
 /*word frequency count*/
-int main()
+int main(int argc, char *argv[])
 {
-  struct tnode *root;
+  struct tnode *root, *p;
   char word[MAXWORD];
 
-  root = NULL;
-  while(getword(word, MAXWORD) != EOF)
+  if (argc != 2)
   {
-    if(isalpha(word[0]))
+    printf("Usage: s-6-5.out <string>\n");
+
+    return -1;
+  }
+
+  root = NULL;
+  while (getword(word, MAXWORD) != EOF)
+  {
+    if (isalpha(word[0]))
     {
       root = addtree(root, word);
     }
   }
 
+  printf("\nThe total stastics:\n");
   treeprint(root);
+
+  printf("\nThe count of %s:\n", argv[1]);
+  p = treefind(root, argv[1]);
+  if (p)
+  {
+    printf("%d\n", p->count);
+  }
+  else
+  {
+    printf("0\n");
+  }
 
   treedestroy(root);
 
@@ -90,6 +110,28 @@ void treeprint(struct tnode *p)
     printf("%4d %s\n", p->count, p->word);
     treeprint(p->right);
   }
+}
+
+/* Find the node */
+struct tnode *treefind(struct tnode *p, char *word)
+{
+  int cond = 0;
+
+  if (p != NULL)
+  {
+    cond = strcmp(word, p->word);
+
+    if (cond < 0)
+    {
+      p = treefind(p->left, word);
+    }
+    else if (cond > 0)
+    {
+      p = treefind(p->right, word);
+    }
+  }
+
+  return p;
 }
 
 /*talloc: make a tnode*/
