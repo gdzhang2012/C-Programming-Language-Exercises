@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include "utils.h"
 
-#define MAXWORD 100
-
 char *Strdup(char *);
 struct tnode *talloc(void);
 struct tnode *addtree(struct tnode *, char *);

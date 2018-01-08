@@ -1,5 +1,6 @@
 #define BUFSIZE 1000 /* common buffer size */
 #define MAXLINE 1000 /* maximum length for one line */
+#define MAXWORD 100 /* maximum length for one word */
 
 /* read a line */
 int Getline(char line[], int max);

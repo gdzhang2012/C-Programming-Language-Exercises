@@ -40,6 +40,9 @@ e-4-2.out: e-4-2.o
 s-6-5.out: s-6-5.o
 	$(CC) $(MYCFLAGS) $< $(LIBS) -o $@
 
+s-6-3.out: s-6-3.o
+	$(CC) $(MYCFLAGS) $< $(LIBS) -o $@
+
 clean:
 	rm -rf *.o *.out lib/*.o lib/*.a
 

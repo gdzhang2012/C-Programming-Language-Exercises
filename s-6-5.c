@@ -1,1 +1,1 @@
-ch6/examples/word_count_by_binary_search_tree.c
+ch6/sample/word_count_by_binary_search_tree.c
