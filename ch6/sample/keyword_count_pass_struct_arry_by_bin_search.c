@@ -19,6 +19,7 @@ struct key {
   {"const", 0},
   {"continue", 0},
   {"default", 0},
+  {"int", 0},
   {"unsigned", 0},
   {"void", 0},
   {"volatile", 0},
@@ -47,7 +48,7 @@ int main()
   {
     if (keytab[n].count > 0)
     {
-      printf("%4d %s\n", keytab[n].count, keytab[n].word);
+      printf("\n%4d %s\n", keytab[n].count, keytab[n].word);
     }
   }
 
@@ -67,18 +68,24 @@ int binsearch(char *word, struct key tab[], int n)
     mid = (low + high) / 2;
     printf("low:%d, high:%d, mid:%d\n", low, high, mid);
     printf("word:%s, tab[%d]:%s, tab[%d]:%s, tab[%d]:%s\n",
-            word, low, tab[low], high, tab[high], mid, tab[mid]);
+      word, low, tab[low].word, high, tab[high].word, mid, tab[mid].word);
 
     if ((cond = strcmp(word, tab[mid].word)) < 0)
     {
+      printf("%s is lower than %s\n\n", word, tab[mid].word);
+
       high = mid - 1;
     }
     else if (cond > 0)
     {
+      printf("%s is larger than %s\n\n", word, tab[mid].word);
+
       low = mid + 1;
     }
     else
     {
+      printf("%s is equal to %s\n\n", word, tab[mid].word);
+
       return mid;
     }
   }
