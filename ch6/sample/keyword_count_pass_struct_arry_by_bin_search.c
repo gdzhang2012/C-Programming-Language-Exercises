@@ -65,6 +65,10 @@ int binsearch(char *word, struct key tab[], int n)
   while (low <= high)
   {
     mid = (low + high) / 2;
+    printf("low:%d, high:%d, mid:%d\n", low, high, mid);
+    printf("word:%s, tab[%d]:%s, tab[%d]:%s, tab[%d]:%s\n",
+            word, low, tab[low], high, tab[high], mid, tab[mid]);
+
     if ((cond = strcmp(word, tab[mid].word)) < 0)
     {
       high = mid - 1;
