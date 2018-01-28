@@ -1,49 +1,46 @@
-#$(warning test1)
-
-#头文件及库路径
-CFLAGS=-I./include/ -L./lib
-#优化
-OFLAGS=-O0
-#调试
-DGFLAGS=-g
-#警告
-WARNFLGS=-Wall -Werror -Wfatal-errors
-
+#头文件路径
+HDPATHS = -I./include
 #库路径
-LIBDIR=./lib
+LBPATHS = -L./lib
+#优化
+OFLAGS = -O0
+#调试
+DGFLAGS = -g -DDEBUG
+#警告
+WARNFLGS = -Wall -Werror
+
 #函数库
-LIBS=-lutils -lpthread
+LIBS = -lutils -lpthread
 
 #编译
-MYCFLAGS=$(CFLAGS) $(WARNFLGS) $(DGFLAGS) $(OFLAGS)
+CPFLAGS = $(HDPATHS) $(WARNFLGS) $(DGFLAGS) $(OFLAGS)
+#链接
+LKFLAGS = $(LBPATHS) $(LIBS) $(WARNFLGS) $(DGFLAGS) $(OFLAGS)
 
 #模式规则
 %.o : %.c
-	$(CC) -c $(MYCFLAGS) $< -o $@
+	$(CC) -c $(CPFLAGS) $< -o $@
 
 all:
 
-libutils.a: $(LIBDIR)/utils.o
-	$(AR) rcs $(LIBDIR)/$@ $<
+libutils.a: lib/utils.o
+	$(AR) rcs lib/$@ $<
 
-# TODO
-# need an auto mode
-e-4-1.out: e-4-1.o
-	$(CC) $(MYCFLAGS) $< $(LIBS) -o $@
+list := s-4-2 e-4-2 s-6-5 s-6-3
+#TODO
+#list ?= s-4-2 e-4-2 s-6-5 s-6-3
+#list = s-4-2 e-4-2 s-6-5 s-6-3
 
-s-4-2.out: s-4-2.o
-	$(CC) $(MYCFLAGS) $< $(LIBS) -o $@
+define pattern
+$(1).out: libutils.a $(1).o
+	$(CC) $(LKFLAGS) $(1).o $(LIBS) -o $(1).out
+endef
 
-e-4-2.out: e-4-2.o
-	$(CC) $(MYCFLAGS) $< $(LIBS) -o $@
-
-s-6-5.out: s-6-5.o
-	$(CC) $(MYCFLAGS) $< $(LIBS) -o $@
-
-s-6-3.out: s-6-3.o
-	$(CC) $(MYCFLAGS) $< $(LIBS) -o $@
+#$(foreach file, $(list), $(warning $(call pattern, $(file))))
+$(foreach file, $(list), $(eval $(call pattern, $(file))))
 
 clean:
 	rm -rf *.o *.out lib/*.o lib/*.a
 
+#TODO
 .PHONY: clean
