@@ -28,6 +28,7 @@ int main()
   int i = 0;
 
   list *head, *tail, *p = NULL;
+  list *next = NULL;
 
   head = (p_list)(malloc(sizeof(list)));
   if (head == NULL)
@@ -88,22 +89,26 @@ int main()
   printf("\n");
 
   printf("free str_list:\n");
-  p = head->next;
-  while (p != NULL)
+  p = head;
+  while (p)
   {
-    if(p->next != NULL)
+    if (p != head)
     {
-      printf("%s, ", p->str);
-    }
-    else
-    {
-      printf("%s", p->str);
+      if (p == head->next)
+      {
+        printf("%s", p->str);
+      }
+      else
+      {
+        printf(", %s", p->str);
+      }
     }
 
-    head->next = p->next;
+    next = p->next;
     free(p);
-    p = head->next;
+    p = next;
   }
   printf("\n");
-  free(head);
+
+  return 0;
 }
